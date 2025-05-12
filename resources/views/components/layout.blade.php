@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? '' }} :: Proyecto Da Vinci</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ url ('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url ('css/style.css') }}">
 </head>
 <body>
     <div id="app">
@@ -18,15 +18,13 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" 
-                            {!! request()->routeIs("home") ? 'aria-current="page"' : '' !!}
-                            href="{{ route('home') }}">Home</a>
+                            <x-nav-link route="home">Home</x-nav-link>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('blog') ? 'active' : '' }}" href="{{ route('blog') }}">Noticias</a>
+                            <x-nav-link route="blog.index">Noticias</x-nav-link>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contactanos</a>
+                            <x-nav-link route="contact">Contactanos</x-nav-link>
                         </li>
                     </ul>
                 </div>

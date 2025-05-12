@@ -8,12 +8,13 @@ use Illuminate\Contracts\View\View;
 
 class NavLink extends Component
 {
+    public string $route;
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(string $route)
     {
-        //
+        $this->route = $route;
     }
 
     /**
