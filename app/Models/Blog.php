@@ -11,4 +11,10 @@ class Blog extends Model
 
     protected $table = 'blogs';
     protected $primaryKey = 'blog_id';
+    protected $fillable = [
+        'title',
+        'excerpt',
+        'body',
+        'published_at'
+    ];
 }

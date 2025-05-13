@@ -31,6 +31,9 @@
             </div>
         </nav>
         <main class="p-4">
+            @if(session()->has('feedback.message'))
+                <div class="alert alert-success">{!! session()->get('feedback.message') !!}</div>
+            @endif
             {{ $slot }}
         </main>
         <footer class="footer text-bg-dark text-center">

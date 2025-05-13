@@ -11,3 +11,7 @@ Route::get('blog/listado', [\App\Http\Controllers\BlogController::class, 'index'
     Route::get('blog/{id}', [\App\Http\Controllers\BlogController::class, 'view'])
     ->name('blog.view')
     ->whereNumber('id');
+Route::get('blog/publicar', [\App\Http\Controllers\BlogController::class, 'create'])
+    ->name('blog.create');
+Route::post('blog/publicar', [\App\Http\Controllers\BlogController::class, 'store'])
+    ->name('blog.store');
