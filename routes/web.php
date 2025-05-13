@@ -15,3 +15,16 @@ Route::get('blog/publicar', [\App\Http\Controllers\BlogController::class, 'creat
     ->name('blog.create');
 Route::post('blog/publicar', [\App\Http\Controllers\BlogController::class, 'store'])
     ->name('blog.store');
+Route::get('blog/{id}/eliminar', [\App\Http\Controllers\BlogController::class, 'delete'])
+    ->name('blog.delete');
+//Route::post('blog/{id}/eliminar', [\App\Http\Controllers\BlogController::class, 'destroy'])
+//    ->name('blog.destroy');
+Route::delete('blog/{id}/eliminar', [\App\Http\Controllers\BlogController::class, 'destroy'])
+    ->name('blog.destroy');
+
+Route::get('blog/editar/{id}', [\App\Http\Controllers\BlogController::class, 'edit'])
+    ->name('blog.edit');
+//Route::post('blog/editar/{id}', [\App\Http\Controllers\BlogController::class, 'edit'])
+//    ->name('blog.edit');
+Route::put('blog/editar/{id}', [\App\Http\Controllers\BlogController::class, 'update'])
+    ->name('blog.update');

@@ -20,8 +20,20 @@
                 <td>{{ $blog->title }}</td>
                 <td>{{ $blog->excerpt }}</td>
                 <td>{{ $blog->published_at }}</td>
-                <td> <a href="{{ route('blog.view', ['id' => $blog->blog_id]) }}" class="btn btn-primary">Ver</a> </td>
-           </tr>
+                <td class="align-top">
+                    <div class="d-flex gap-1">
+                        <a href="{{ route('blog.view', ['id' => $blog->blog_id]) }}"
+                        class="btn btn-primary"
+                        >Ver</a>
+                        <a href="{{ route('blog.edit', ['id' => $blog->blog_id]) }}"
+                        class="btn btn-secondary"
+                        >Editar</a>
+                        <a href="{{ route('blog.delete', ['id' => $blog->blog_id]) }}"
+                        class="btn btn-danger"
+                        >Eliminar</a>
+                    </div>
+                </td>
+            </tr>
             <?php
             endforeach;
             ?>

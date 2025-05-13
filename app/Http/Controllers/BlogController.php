@@ -59,4 +59,49 @@ class BlogController extends Controller
         ->route('blog.index')
         ->with('feedback.message', 'El post <b>'.e($input['title']).'</b> se publicó');
     }
+
+    public function destroy(int $id){
+        $blog = Blog::findOrFail($id);
+        $blog->delete($id);
+
+        return redirect()
+            ->route('blog.index')
+            ->with('feedback.message', 'El post <b>'.e($blog->title).'</b> se eliminó');
+    }
+
+    public function delete(int $id){
+        return view('blog.delete', [
+            'blog' => Blog::findOrFail($id)
+        ]);
+    }
+
+    public function edit(int $id){
+        return view('blog.edit', [
+            'blog' => Blog::findOrFail($id)
+        ]);
+    }
+
+    public function update(Request $request, int $id){
+        $request->validate([
+            'title' => ['required', 'min:2'],
+            'excerpt' => ['required', 'min:10'],
+            'body' => 'required',
+            'published_at' => ['required', 'date']
+        ],[
+            'title.required' => 'El título es obligatorio',
+            'title.min' => 'El título debe tener al menos :min caracteres',
+            'excerpt.required' => 'La introducción es obligatorio',
+            'excerpt.min' => 'La introducción debe tener al menos :min caracteres',
+            'body.required' => 'El cuerpo es obligatorio',
+            'published_at.required' => 'La fecha de publicación es obligatoria',
+            'published_at.date' => 'La fecha de publicación no es válida'
+        ]);
+        
+        $blog = Blog::findOrFail($id);
+        $blog->update($request->all());
+
+        return redirect()
+        ->route('blog.index')
+        ->with('feedback.message', 'El post <b>'.e($blog->title).'</b> se actualizó');
+    }
 }
