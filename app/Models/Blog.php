@@ -10,5 +10,5 @@ class Blog extends Model
     use HasFactory;
 
     protected $table = 'blogs';
-    protected $primaryKey = 'post_id';
+    protected $primaryKey = 'blog_id';
 }
