@@ -26,6 +26,20 @@
                         <li class="nav-item">
                             <x-nav-link route="contact">Contactanos</x-nav-link>
                         </li>
+                        @auth
+                            <li class="nav-item">
+                                <form action="{{ url('/cerrar-sesion') }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="nav-link">
+                                        {{ auth()->user()->email }} (Cerrar Sesión)
+                                    </button>
+                                </form>
+                            </li>
+                        @else
+                        <li class="nav-item">
+                            <x-nav-link route="auth.authenticate">Iniciar Sesión</x-nav-link>
+                        </li>
+                        @endauth
                     </ul>
                 </div>
             </div>

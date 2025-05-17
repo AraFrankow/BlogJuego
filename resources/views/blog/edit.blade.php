@@ -25,7 +25,11 @@
                 class="form-control @error('title') is-invalid @enderror"
                 @error('title') aria-invalid="true" aria-errormessage="error-title" @enderror
                 value="{{ old('title', $blog->title) }}"
+                
             >
+            @error('title')
+                <div class="text-danger" id="error-title">{{ $message }}</div>
+            @enderror
         </div>
         <div class="mb-3">
             <label for="cover" class="form-label">Imagen sobre el juego</label>
@@ -54,6 +58,9 @@
                 @error('excerpt') aria-invalid="true" aria-errormessage="error-excerpt" @enderror
                 value="{{ old('excerpt', $blog->excerpt) }}"
             >
+            @error('excerpt')
+                <div class="text-danger" id="error-excerpt">{{ $message }}</div>
+            @enderror
         </div>
         <div class="mb-3">
             <label for="body" class="form-label">Cuerpo del Post</label>
@@ -62,6 +69,9 @@
                 id="body" 
                 class="form-control"
             >{{ old('body', $blog->body) }}</textarea>
+            @error('body')
+                <div class="text-danger" id="error-body">{{ $message }}</div>
+            @enderror
         </div>
         <div class="mb-3">
             <label for="published_at" class="form-label">Publicado</label>
@@ -73,6 +83,9 @@
                 @error('published_at') aria-invalid="true" aria-errormessage="error-cover_description" @enderror
                 value="{{ old('published_at', $blog->published_at) }}"
             >
+            @error('published_at')
+                <div class="text-danger" id="error-published_at">{{ $message }}</div>
+            @enderror
         </div>
         <button type="submit" class="btn btn-primary">Aplicar cambios</button>
     </form>
