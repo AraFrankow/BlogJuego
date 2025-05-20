@@ -45,19 +45,13 @@ class BlogController extends Controller
         $input = $request->all();
 
         Blog::create($input);
-        $input=[
-            'title' => 'Ejemplo de título',
-            'excerpt' => 'Inicio de un post',
-            'body' => 'Este es el cuerpo del post',
-            'published_at' => '2023-10-01'
-        ];
 
         $blog = new Blog();
         $blog->fill($input);
 
         return redirect()
         ->route('blog.index')
-        ->with('feedback.message', 'El post <b>'.e($input['title']).'</b> se publicó');
+        ->with('feedback.message', 'El post <b>'.e($blog->title).'</b> se publicó');
     }
 
     public function destroy(int $id){

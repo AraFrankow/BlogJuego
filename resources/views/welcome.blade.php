@@ -1,9 +1,8 @@
 <x-layout>
     <x-slot:title>Pagina Principal</x-slot:title>
-    <h1 class="m-3">Pagina principal</h1>
 
-    <div class="relative bg-gray-900 text-white min-h-screen flex items-center justify-center overflow-hidden">
-    <div class="absolute inset-0 bg-black bg-[url('/img/fondo.jpg')] bg-cover bg-center opacity-30 blur-sm"></div>
+    <div class="relative fondo text-white min-h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 bg-black opacity-30 blur-sm"></div>
 
     <div class="relative z-10 text-center max-w-2xl px-6">
         <h1 class="text-4xl md:text-6xl font-bold mb-6 tracking-wide text-white">
@@ -17,6 +16,7 @@
         </a>
     </div>
 </div>
+
 
 
 </x-layout>

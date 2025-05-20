@@ -12,13 +12,13 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Proyecto Da Vinci</a>
+                <img src="/img/logo.png" alt="logo de la página" class="logo navbar-brand">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="collapse navbar-collapse centrarLogo" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <x-nav-link route="home">Home</x-nav-link>
@@ -55,7 +55,7 @@
             @endif
             {{ $slot }}
         </main>
-        <footer class="footer text-bg-dark text-center">
+        <footer class="footer navbar-dark text-center">
             <p>Copyright &copy; Arabela Frankow</p>
         </footer>
     </div>
@@ -63,6 +63,6 @@
     
     
     
-    <link rel="stylesheet" href="js/bootstrap.bundle.min.js">
+    <script src="{{ url('js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>

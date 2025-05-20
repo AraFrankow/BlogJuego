@@ -1,46 +1,34 @@
 <x-layout>
     <x-slot:title>Listado de Noticias</x-slot:title>
-    <h1 class="mb-3">Listado de Blogs</h1>
-    @auth
-    <p class="mb-3"> <a href="{{ route('blog.create') }}">Publicar un Post</a> </p>
-    @endauth
 
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Título</th>
-                <th>Resumen</th>
-                <th>Publicado</th>
-                <th>Acciones</th>
-            </tr>
-            <?php
-            foreach($blogs as $blog):
-            ?>
-           <tr>
-                <td>{{ $blog->blog_id }}</td>
-                <td>{{ $blog->title }}</td>
-                <td>{{ $blog->excerpt }}</td>
-                <td>{{ $blog->published_at }}</td>
-                <td class="align-top">
-                    <div class="d-flex gap-1">
-                        <a href="{{ route('blog.view', ['id' => $blog->blog_id]) }}"
-                        class="btn btn-primary"
-                        >Ver</a>
-                        @auth
-                        <a href="{{ route('blog.edit', ['id' => $blog->blog_id]) }}"
-                        class="btn btn-secondary"
-                        >Editar</a>
-                        <a href="{{ route('blog.delete', ['id' => $blog->blog_id]) }}"
-                        class="btn btn-danger"
-                        >Eliminar</a>
-                        @endauth
-                    </div>
-                </td>
-            </tr>
-            <?php
-            endforeach;
-            ?>
-        </thead>
-    </table>
+    <section class="noticias">
+        <div class="container">
+            <h1>Noticias del Desarrollo</h1>
+
+            @auth
+                <div class="mb-4 text-right">
+                    <a href="{{ route('blog.create') }}" class="btn-nuevo">Publicar un Post</a>
+                </div>
+            @endauth
+
+            <div class="grid-noticias">
+                @foreach($blogs as $blog)
+                    <article class="card-noticia">
+                        <div class="contenido">
+                            <h2>{{ $blog->title }}</h2>
+                            <p class="fecha">{{ $blog->published_at }}</p>
+                            <p>{{ $blog->excerpt }}</p>
+                        </div>
+                        <div class="acciones">
+                            <a href="{{ route('blog.view', ['id' => $blog->blog_id]) }}" class="btn-ver">Ver</a>
+                            @auth
+                                <a href="{{ route('blog.edit', ['id' => $blog->blog_id]) }}" class="btn-editar">Editar</a>
+                                <a href="{{ route('blog.delete', ['id' => $blog->blog_id]) }}" class="btn-eliminar">Eliminar</a>
+                            @endauth
+                        </div>
+                    </article>
+                @endforeach
+            </div>
+        </div>
+    </section>
 </x-layout>
