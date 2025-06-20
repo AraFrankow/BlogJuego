@@ -19,6 +19,11 @@
                             <p class="fecha">{{ $blog->published_at }}</p>
                             <p>{{ $blog->categoria->name }}</p>
                             <p>{{ $blog->excerpt }}</p>
+                            <p>
+                                @foreach($blog->tags as $tag)
+                                    <span class="badge bg-secondary">{{ $tag->name }}</span>
+                                @endforeach
+                            </p>
                         </div>
                         <div class="acciones">
                             <a href="{{ route('blog.view', ['id' => $blog->blog_id]) }}" class="btn-ver">Ver</a>

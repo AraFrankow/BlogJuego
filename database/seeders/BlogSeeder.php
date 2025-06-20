@@ -31,5 +31,28 @@ class BlogSeeder extends Seeder
                 'published_at' => now()
             ],
         ]);
+
+        DB::table('blogs_has_tags')->insert([
+            [
+                'blog_fk' => 1,
+                'tag_fk' => 3 // Actualización
+            ],
+            [
+                'blog_fk' => 1,
+                'tag_fk' => 2 // Progreso
+            ],
+            [
+                'blog_fk' => 1,
+                'tag_fk' => 14 // Lore
+            ],
+            [
+                'blog_fk' => 2,
+                'tag_fk' => 3 // Actualización
+            ],
+            [
+                'blog_fk' => 2,
+                'tag_fk' => 2 // Progreso
+            ],
+        ]);
     }
 }

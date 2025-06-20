@@ -1,6 +1,8 @@
 <?php
 /** @var \Illuminate\Support\ViewErrorBag $errors */
 /** @var \App\Models\Blog $blog */
+/** @var \Illuminate\Support\Collection<int, \App\Models\Tags> $tags */
+$tagIds = $blog->tags->pluck('tag_id')->all();
 ?>
 <x-layout>
     <x-slot:title>Editar Post {{ $blog->title }}</x-slot:title>
@@ -104,6 +106,22 @@
                        <p class="input-error" id="error-published_at">{{ $message }}</p>
                     @enderror
                 </div>
+
+                <fieldset class="mb-3">
+                    <legend class="form-label">Tags</legend>
+                    @foreach ($tags as $tag)
+                        <label class="me-3">
+                            <input 
+                                type="checkbox" 
+                                name="tag_id[]" 
+                                value="{{ $tag->tag_id }}"
+                                @checked(in_array($tag->tag_id, old('tag_id', $tagIds)))
+                            >
+                            {{ $tag->name }}
+                        </label>
+                    @endforeach
+                </fieldset>
+
                 <button type="submit" class="btn-principal">Aplicar cambios</button>
             </form>
         </div>

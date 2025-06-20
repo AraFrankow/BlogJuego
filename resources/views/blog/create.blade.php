@@ -77,6 +77,17 @@
                     <p class="input-error" id="error-published_at">{{ $message }}</p>
                 @enderror
 
+                <fieldset class="mb-3">
+                    <legend>Tags</legend>
+                    
+                    @foreach($tags as $tag)
+                        <label class="me-3">
+                            <input type="checkbox" name="tag_id[]" value="{{ $tag->tag_id }}" @checked(in_array($tag->tag_id, old('tag_id', [])))>
+                            {{ $tag->name }}
+                        </label>
+                    @endforeach
+                </fieldset>
+                
                 <button type="submit" class="btn-principal">Publicar</button>
             </form>
         </div>

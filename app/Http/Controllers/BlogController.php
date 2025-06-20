@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use Illuminate\Http\Request;
 use App\Models\Categoria;
+use App\Models\Tag;
 
 class BlogController extends Controller
 {
     public function index()
     {
-        $allBlogs = Blog::with(['categoria'])->get();
+        $allBlogs = Blog::with(['categoria', 'tags'])->get();
 
         return view('blog.index', [
             'blogs' => $allBlogs
@@ -25,6 +26,7 @@ class BlogController extends Controller
 
     public function create(){
         return view('blog.create',[
+            'tags'=> Tag::orderBy('name')->get(),
             'categorias'=> Categoria::all(),
         ]);
     }
@@ -47,10 +49,8 @@ class BlogController extends Controller
         
         $input = $request->all();
 
-        Blog::create($input);
-
-        $blog = new Blog();
-        $blog->fill($input);
+        $blog = Blog::create($input);
+        $blog->tags()->attach($input['tag_id']);
 
         return redirect()
         ->route('blog.index')
@@ -59,6 +59,7 @@ class BlogController extends Controller
 
     public function destroy(int $id){
         $blog = Blog::findOrFail($id);
+        $blog->tags()->detach();
         $blog->delete($id);
 
         return redirect()
@@ -76,6 +77,7 @@ class BlogController extends Controller
         return view('blog.edit', [
             'blog' => Blog::findOrFail($id),
             'categorias' => Categoria::all(),
+            'tags' => Tag::orderBy('name')->get(),
         ]);
     }
 
@@ -97,6 +99,7 @@ class BlogController extends Controller
         
         $blog = Blog::findOrFail($id);
         $blog->update($request->all());
+        $blog->tags()->sync($request->input('tag_id'));
 
         return redirect()
         ->route('blog.index')
