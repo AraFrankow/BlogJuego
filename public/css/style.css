@@ -270,7 +270,7 @@ label {
     font-weight: bold;
     color: #ccc;
 }
-input[type="text"], input[type="date"], input[type="file"], textarea {
+input[type="text"], input[type="date"], input[type="file"], textarea, select[id="categoria_fk"] {
     width: 100%;
     padding: 0.6rem;
     margin-top: 0.5rem;

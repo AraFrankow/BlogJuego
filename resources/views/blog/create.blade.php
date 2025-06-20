@@ -30,12 +30,24 @@
                     <p class="input-error" id="error-title">{{ $message }}</p>
                 @enderror
 
+                <label for="categoria_fk">Categoria</label>
+                <select name="categoria_fk" id="categoria_fk">
+                    @foreach($categorias as $categoria)
+                        <option 
+                            value="{{ $categoria->categoria_id }}"
+                            @selected($categoria->categoria_id == old('categoria_fk'))
+                        >
+                            {{ $categoria->name }} ({{ $categoria->abbreviation }})
+                        </option>
+                    @endforeach
+                </select>
+                
                 <label for="cover">Imagen sobre el juego</label>
                 <input type="file" id="cover" name="cover">
 
                 <label for="cover_description">Descripción de la imagen <span class="small">(Opcional)</span></label>
                 <input type="text" id="cover_description" name="cover_description" value="{{ old('cover_description') }}">
-
+                
                 <label for="excerpt">Introducción al post</label>
                 <input 
                     type="text" 

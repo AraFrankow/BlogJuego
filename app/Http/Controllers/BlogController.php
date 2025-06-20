@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use App\Models\Categoria;
 
 class BlogController extends Controller
 {
     public function index()
     {
-        $allBlogs = Blog::all();
+        $allBlogs = Blog::with(['categoria'])->get();
 
         return view('blog.index', [
             'blogs' => $allBlogs
@@ -23,7 +24,9 @@ class BlogController extends Controller
     }
 
     public function create(){
-        return view('blog.create');
+        return view('blog.create',[
+            'categorias'=> Categoria::all(),
+        ]);
     }
 
     public function store(Request $request){
@@ -71,7 +74,8 @@ class BlogController extends Controller
 
     public function edit(int $id){
         return view('blog.edit', [
-            'blog' => Blog::findOrFail($id)
+            'blog' => Blog::findOrFail($id),
+            'categorias' => Categoria::all(),
         ]);
     }
 

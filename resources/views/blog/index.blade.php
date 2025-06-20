@@ -17,6 +17,7 @@
                         <div class="contenido">
                             <h2>{{ $blog->title }}</h2>
                             <p class="fecha">{{ $blog->published_at }}</p>
+                            <p>{{ $blog->categoria->name }}</p>
                             <p>{{ $blog->excerpt }}</p>
                         </div>
                         <div class="acciones">

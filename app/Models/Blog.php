@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Blog extends Model
 {
@@ -15,6 +16,11 @@ class Blog extends Model
         'title',
         'excerpt',
         'body',
-        'published_at'
+        'published_at',
+        'categoria_fk'
     ];
+    public function categoria(): BelongsTo
+    {
+        return $this->belongsTo(Categoria::class, 'categoria_fk', 'categoria_id');
+    }
 }

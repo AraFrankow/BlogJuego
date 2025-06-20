@@ -33,6 +33,21 @@
                         <p class="input-error" id="error-title">{{ $message }}</p>
                     @enderror
                 </div>
+
+                <div class="mb-3">
+                    <label for="categoria_fk" class="form-label">Categoria</label>
+                    <select name="caategoria_fk" id="categoria_fk" class="form-control">
+                        @foreach ($categorias as $categoria)
+                            <option 
+                                value="{{ $categoria->categoria_id }}"
+                                @selected($categoria->categoria_id == old('categoria_fk', $blog->categoria_fk))
+                            >
+                                {{ $categoria->name }} ({{ $categoria->abbreviation }})
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <div class="mb-3">
                     <label for="cover" class="form-label">Imagen sobre el juego</label>
                     <input type="file" id="cover" name="cover" class="form-control">
