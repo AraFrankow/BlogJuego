@@ -8,9 +8,19 @@ Route::get('contactanos', [\App\Http\Controllers\ContactController::class, 'cont
     ->name('contact');
 Route::get('blog/listado', [\App\Http\Controllers\BlogController::class, 'index'])
     ->name('blog.index');
-    Route::get('blog/{id}', [\App\Http\Controllers\BlogController::class, 'view'])
+Route::get('blog/{id}', [\App\Http\Controllers\BlogController::class, 'view'])
     ->name('blog.view')
+    ->middleware('require-age')
     ->whereNumber('id');
+
+Route::get('blog/{id}/verificar-edad', [\App\Http\Controllers\AgeVerificationController::class, 'show'])
+    ->name('blog.age-verification.show')
+    ->whereNumber('id');
+
+Route::post('blog/{id}/verificar-edad', [\App\Http\Controllers\AgeVerificationController::class, 'save'])
+    ->name('blog.age-verification.save')
+    ->whereNumber('id');
+
 Route::get('blog/publicar', [\App\Http\Controllers\BlogController::class, 'create'])
     ->name('blog.create')
     ->middleware('auth');
