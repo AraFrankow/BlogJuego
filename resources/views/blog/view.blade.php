@@ -17,6 +17,15 @@
                     <div class="contenido">
                         {!! nl2br($blog->body) !!} <!-- Hace el salto de linea y lo imprime como html -->
                     </div>
+                    @if($blog->cover && Illuminate\Support\Facades\Storage::has($blog->cover))
+                        <img 
+                        src="{{ Illuminate\Support\Facades\Storage::url($blog->cover) }}" 
+                        alt="{{  $blog->cover_description }}"
+                        class="img-fluid"
+                        >
+                    @else
+                        <p>Sin imagen</p>
+                    @endif
                 </div>    
             </div>
         </div>

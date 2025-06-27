@@ -6,6 +6,7 @@ use App\Models\Blog;
 use Illuminate\Http\Request;
 use App\Models\Categoria;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -49,8 +50,12 @@ class BlogController extends Controller
         
         $input = $request->all();
 
+        if($request->hasFile('cover')){
+            $input['cover'] = $request->file('cover')->store('covers', 'public');
+        }
+
         $blog = Blog::create($input);
-        $blog->tags()->attach($input['tag_id']);
+        $blog->tags()->attach($input['tag_id'] ?? []);
 
         return redirect()
         ->route('blog.index')
@@ -62,6 +67,10 @@ class BlogController extends Controller
         $blog->tags()->detach();
         $blog->delete($id);
 
+        if($blog->cover && Storage::has($blog->cover)){
+            Storage::delete($blog->cover);
+        }
+        
         return redirect()
             ->route('blog.index')
             ->with('feedback.message', 'El post <b>'.e($blog->title).'</b> se eliminó');
@@ -100,6 +109,24 @@ class BlogController extends Controller
         $blog = Blog::findOrFail($id);
         $blog->update($request->all());
         $blog->tags()->sync($request->input('tag_id'));
+
+        $input = $request->except(['_token', '_method']);
+        $oldCover = $blog->cover;
+
+        if($request->hasFile('cover')){
+            $input['cover'] = $request->file('cover')->store('covers', 'public');
+        }
+
+        $blog->update($input);
+        $blog->tags()->sync($request->input('tag_id', []));
+
+        if(
+            request()->hasFile('cover') &&
+            $oldCover &&
+            Storage::has($oldCover)
+        ){
+            Storage::delete($oldCover);
+        }
 
         return redirect()
         ->route('blog.index')

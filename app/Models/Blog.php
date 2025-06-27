@@ -20,7 +20,9 @@ class Blog extends Model
         'excerpt',
         'body',
         'published_at',
-        'categoria_fk'
+        'categoria_fk',
+        'cover',
+        'cover_description'
     ];
     public function categoria(): BelongsTo
     {

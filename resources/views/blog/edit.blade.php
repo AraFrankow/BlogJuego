@@ -17,7 +17,8 @@ $tagIds = $blog->tags->pluck('tag_id')->all();
             @endif
             <form 
                 action="{{ route('blog.update', ['id' => $blog->blog_id]) }}" 
-                method="post">
+                method="post"
+                enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
@@ -49,7 +50,19 @@ $tagIds = $blog->tags->pluck('tag_id')->all();
                         @endforeach
                     </select>
                 </div>
-
+                <div class="mb-3">
+                    <p>Imagen Actual:</p>   
+                    @if($blog->cover && Illuminate\Support\Facades\Storage::has($blog->cover))
+                        <img 
+                        src="{{ Illuminate\Support\Facades\Storage::url($blog->cover) }}" 
+                        alt="{{  $blog->cover_description }}"
+                        class="img-fluid"
+                        style ="max-width: 300px"
+                        >
+                    @else
+                        <p>Sin imagen</p>
+                    @endif
+                </div>
                 <div class="mb-3">
                     <label for="cover" class="form-label">Imagen sobre el juego</label>
                     <input type="file" id="cover" name="cover" class="form-control">
