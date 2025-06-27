@@ -10,12 +10,29 @@ use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $allBlogs = Blog::with(['categoria', 'tags'])->get();
+        $blogsQuery = Blog::with(['categoria', 'tags']);
+
+        $serchParams = [
+            's-title' => request()->query('s-title'),
+            's-categoria' => request()->query('s-categoria'),
+        ];
+
+        if($serchParams['s-title']){
+            $blogsQuery->where('title', 'like', '%'.$serchParams['s-title'].'%');
+        }
+
+        if($serchParams['s-categoria']){
+            $blogsQuery->where('categoria_fk', '=', $serchParams['s-categoria']);
+        }
+
+        $allBlogs = $blogsQuery->paginate(3)->withQueryString();
 
         return view('blog.index', [
-            'blogs' => $allBlogs
+            'blogs' => $allBlogs,
+            'categorias' => Categoria::all(),
+            'serchParams' => $serchParams,
         ]);
     }
 

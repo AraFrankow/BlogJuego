@@ -11,6 +11,42 @@
                 </div>
             @endauth
 
+            <section class="mb-3">
+                <h2>Buscador</h2>
+
+                <form action="{{ route('blog.index') }}" method="get">
+                    <div class="d-flex gap-3 allign-items-end mb-3">
+                        <div>
+                            <label for="s-title" class="form-label">Titulo</label>
+                            <input type="serch" name="s-title" id="s-title" class="form-control" value="{{ $serchParams['s-title'] }}">
+                        </div>
+                        <div>
+                            <label for="s-categoria" class="form-label">Categoría</label>
+                            <select name="s-categoria" id="s-categoria" class="form-control">
+                                <option value="">Todas</option>
+                                @foreach($categorias as $categoria)
+                                    <option 
+                                        value="{{ $categoria->categoria_id }}"
+                                        @selected($categoria->categoria_id == $serchParams['s-categoria'])
+                                        >
+                                        {{ $categoria->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </div>
+                </form>
+            </section>
+
+            @if(!empty($serchParams['s-title']))
+                <p class="mb-3 fst-italic">
+                    Resultados de la búsqueda: <b>{{ $serchParams['s-title'] }}</b>
+                </p>
+            @endif
+            
+            <h2 class="visually-hidden">Posts</h2>
+            @if($blogs->isNotEmpty())
             <div class="grid-noticias">
                 @foreach($blogs as $blog)
                     <article class="card-noticia">
@@ -28,13 +64,17 @@
                         <div class="acciones">
                             <a href="{{ route('blog.view', ['id' => $blog->blog_id]) }}" class="btn-ver">Ver</a>
                             @auth
-                                <a href="{{ route('blog.edit', ['blog' => $blog->blog_id]) }}" class="btn-editar">Editar</a>
+                                <a href="{{ route('blog.edit', ['id' => $blog->blog_id]) }}" class="btn-editar">Editar</a>
                                 <a href="{{ route('blog.delete', ['id' => $blog->blog_id]) }}" class="btn-eliminar">Eliminar</a>
                             @endauth
                         </div>
                     </article>
                 @endforeach
             </div>
+            {{ $blogs->links() }}
+            @else
+                <p class="alert alert-info">No hay posts que coincidan con la búsqueda.</p>
+            @endif
         </div>
     </section>
 </x-layout>
