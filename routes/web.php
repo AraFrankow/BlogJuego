@@ -56,3 +56,7 @@ Route::post('iniciar-sesion', [\App\Http\Controllers\AuthController::class, 'aut
 
 Route::post('cerrar-sesion', [\App\Http\Controllers\AuthController::class, 'logout'])
     ->name('auth.logout');
+
+Route::post('blog/{id}/notificar', [\App\Http\Controllers\BlogNotificationController::class, 'notify'])
+    ->name('blog.notify')
+    ->middleware('auth');

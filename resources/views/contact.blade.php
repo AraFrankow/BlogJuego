@@ -5,7 +5,7 @@
             <h2>Contactanos</h2>
             <p>¿Tenés dudas, sugerencias o querés unirte al desarrollo? Escribinos.</p>
 
-            <form action="#" method="get">
+            <form action="{{ route('blog.notify', ['id' => 1]) }}" method="post">
                 @csrf
                 <div class="form-group">
                     <label for="nombreCont">Nombre</label>

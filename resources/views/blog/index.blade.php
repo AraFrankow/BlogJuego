@@ -12,31 +12,45 @@
             @endauth
 
             <section class="mb-3">
-                <h2>Buscador</h2>
-
-                <form action="{{ route('blog.index') }}" method="get">
-                    <div class="d-flex gap-3 allign-items-end mb-3">
-                        <div>
-                            <label for="s-title" class="form-label">Titulo</label>
-                            <input type="serch" name="s-title" id="s-title" class="form-control" value="{{ $serchParams['s-title'] }}">
-                        </div>
-                        <div>
-                            <label for="s-categoria" class="form-label">Categoría</label>
-                            <select name="s-categoria" id="s-categoria" class="form-control">
-                                <option value="">Todas</option>
-                                @foreach($categorias as $categoria)
-                                    <option 
-                                        value="{{ $categoria->categoria_id }}"
-                                        @selected($categoria->categoria_id == $serchParams['s-categoria'])
-                                        >
-                                        {{ $categoria->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Buscar</button>
+                <div class="d-flex justify-content-between align-items-end mb-3">
+                    <div>
+                        <h2>Buscador</h2>
+                        <form action="{{ route('blog.index') }}" method="get">
+                            <div class="d-flex gap-3">
+                                <div>
+                                    <label for="s-title" class="form-label">Título</label>
+                                    <input type="search" name="s-title" id="s-title" class="form-control" value="{{ $serchParams['s-title'] }}">
+                                </div>
+                                <div>
+                                    <label for="s-categoria" class="form-label">Categoría</label>
+                                    <select name="s-categoria" id="s-categoria" class="form-control">
+                                        <option value="">Todas</option>
+                                        @foreach($categorias as $categoria)
+                                            <option 
+                                            value="{{ $categoria->categoria_id }}"
+                                            @selected($categoria->categoria_id == $serchParams['s-categoria'])
+                                            >
+                                                {{ $categoria->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="align-self-end">
+                                    <button type="submit" class="btn btn-primary">Buscar</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </form>
+
+                    @auth
+                        <div>
+                            <form action="{{ route('blog.notify', ['id' => $blogs[2]->blog_id ?? $blogs->last()->blog_id]) }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-warning">Notificar</button>
+                            </form>
+                        </div>
+                    @endauth
+                </div>
             </section>
 
             @if(!empty($serchParams['s-title']))
