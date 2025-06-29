@@ -35,11 +35,12 @@
                             </div>
                         </form>
                     </div>
-
                     @auth
-                        <div class="mb-4 text-right">
-                            <a href="{{ route('blog.create') }}" class="btn-nuevo">Publicar un Post</a>
-                        </div>
+                        @if(auth()->user()->role === 'admin')
+                            <div class="mb-4 text-right">
+                                <a href="{{ route('blog.create') }}" class="btn-nuevo">Publicar un Post</a>
+                            </div>
+                        @endif
                     @endauth
                 </div>
             </section>
@@ -69,8 +70,10 @@
                         <div class="acciones">
                             <a href="{{ route('blog.view', ['id' => $blog->blog_id]) }}" class="btn-ver">Ver</a>
                             @auth
-                                <a href="{{ route('blog.edit', ['id' => $blog->blog_id]) }}" class="btn-editar">Editar</a>
-                                <a href="{{ route('blog.delete', ['id' => $blog->blog_id]) }}" class="btn-eliminar">Eliminar</a>
+                                @if(auth()->user()->role === 'admin')
+                                    <a href="{{ route('blog.edit', ['id' => $blog->blog_id]) }}" class="btn-editar">Editar</a>
+                                    <a href="{{ route('blog.delete', ['id' => $blog->blog_id]) }}" class="btn-eliminar">Eliminar</a>
+                                @endif
                             @endauth
                         </div>
                     </article>

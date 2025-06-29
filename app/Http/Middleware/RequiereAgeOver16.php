@@ -21,7 +21,7 @@ class RequiereAgeOver16
         $id = $request->route('id');
         $blog = Blog::with('tags')->findOrFail($id);
 
-        $hasRestrictedTag = $blog->tags->contains('tag_id', 23); // ← esto busca si el post tiene el tag "solo +16"
+        $hasRestrictedTag = $blog->tags->contains('tag_id', 23); // ← esto busca si el post tiene el tag "demo"
 
         if ($hasRestrictedTag && !$request->session()->has('age_verified')) {
             return to_route('blog.age-verification.show', ['id' => $id]);

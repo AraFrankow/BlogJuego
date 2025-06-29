@@ -47,11 +47,10 @@
                 <div class="mb-3">
                     <label for="password" class="form-label">Contraseña</label>
                     <input 
-                        type="text" 
+                        type="password" 
                         name="password" 
                         id="password"
                         class="form-control @error('password') is-invalid @enderror" 
-                        value="{{ old('password') }}"
                         @error('password') aria-invalid="true" aria-errormessage="error-password" @enderror 
                     >
                     @error('password')
@@ -59,18 +58,13 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Confirmar Contraseña</label>
+                    <label for="password_confirmation" class="form-label">Confirmar Contraseña</label>
                     <input 
-                        type="text" 
-                        name="password" 
-                        id="password"
-                        class="form-control @error('password') is-invalid @enderror" 
-                        value="{{ old('password') }}"
-                        @error('password') aria-invalid="true" aria-errormessage="error-password" @enderror 
+                        type="password" 
+                        name="password_confirmation" 
+                        id="password_confirmation"
+                        class="form-control" 
                     >
-                    @error('password')
-                        <p class="input-error" id="error-password">{{ $message }}</p>
-                    @enderror
                 </div>
                 <button type="submit" class="btn-principal">Registrarse</button>
             </form>

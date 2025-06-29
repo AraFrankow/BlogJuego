@@ -12,6 +12,14 @@ Route::get('blog/{id}', [\App\Http\Controllers\BlogController::class, 'view'])
     ->name('blog.view')
     ->middleware('require-age')
     ->whereNumber('id');
+    
+Route::get('blog/{id}/verificar-admin', [\App\Http\Controllers\AdminVerificationController::class, 'show'])
+    ->name('blog.admin-verification.show')
+    ->whereNumber('id');
+
+Route::post('blog/{id}/verificar-admin', [\App\Http\Controllers\AdminVerificationController::class, 'save'])
+    ->name('blog.admin-verification.save')
+    ->whereNumber('id');
 
 Route::get('blog/{id}/verificar-edad', [\App\Http\Controllers\AgeVerificationController::class, 'show'])
     ->name('blog.age-verification.show')
@@ -23,31 +31,31 @@ Route::post('blog/{id}/verificar-edad', [\App\Http\Controllers\AgeVerificationCo
 
 Route::get('blog/publicar', [\App\Http\Controllers\BlogController::class, 'create'])
     ->name('blog.create')
-    ->middleware('auth');
+    ->middleware(['auth', \App\Http\Middleware\CheckAdmin::class]);
 
 Route::post('blog/publicar', [\App\Http\Controllers\BlogController::class, 'store'])
     ->name('blog.store')
-    ->middleware('auth');
+    ->middleware(['auth', \App\Http\Middleware\CheckAdmin::class]);
 
 Route::get('blog/{id}/eliminar', [\App\Http\Controllers\BlogController::class, 'delete'])
     ->name('blog.delete')
-    ->middleware('auth');
+    ->middleware(['auth', \App\Http\Middleware\CheckAdmin::class]);
 
 //Route::post('blog/{id}/eliminar', [\App\Http\Controllers\BlogController::class, 'destroy'])
 //    ->name('blog.destroy');
 Route::delete('blog/{id}/eliminar', [\App\Http\Controllers\BlogController::class, 'destroy'])
     ->name('blog.destroy')
-    ->middleware('auth');
+    ->middleware(['auth', \App\Http\Middleware\CheckAdmin::class]);
 
 //Route::post('blog/editar/{id}', [\App\Http\Controllers\BlogController::class, 'edit'])
 //    ->name('blog.edit');
 Route::get('blog/editar/{id}', [\App\Http\Controllers\BlogController::class, 'edit'])
     ->name('blog.edit')
-    ->middleware('auth');
+    ->middleware(['auth', \App\Http\Middleware\CheckAdmin::class]);
 
 Route::put('blog/editar/{id}', [\App\Http\Controllers\BlogController::class, 'update'])
     ->name('blog.update')
-    ->middleware('auth');
+    ->middleware(['auth', \App\Http\Middleware\CheckAdmin::class]);
 
 Route::get('iniciar-sesion', [\App\Http\Controllers\AuthController::class, 'login'])
     ->name('auth.login');
