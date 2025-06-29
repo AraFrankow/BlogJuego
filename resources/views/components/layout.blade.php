@@ -29,22 +29,31 @@
                         <li class="nav-item">
                             <x-nav-link route="contact">Contactanos</x-nav-link>
                         </li>
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto">
                         @auth
                             <li class="nav-item">
-                                <form action="{{ url('/cerrar-sesion') }}" method="post">
+                                <form action="{{ route('auth.logout') }}" method="post">
                                     @csrf
-                                    <button type="submit" class="nav-link">
+                                    <button type="submit" class="nav-link btn btn-link">
                                         {{ auth()->user()->email }} (Cerrar Sesión)
                                     </button>
                                 </form>
                             </li>
-                        @else
-                        <li class="nav-item">
-                            <x-nav-link route="auth.authenticate">Iniciar Sesión</x-nav-link>
-                        </li>
                         @endauth
+
+                        @guest
+                            <li class="nav-item">
+                                <x-nav-link route="auth.login">Iniciar Sesión</x-nav-link>
+                            </li>
+                            <li class="nav-item">
+                                <x-nav-link route="auth.register">Registrarse</x-nav-link>
+                            </li>
+                        @endguest
                     </ul>
                 </div>
+
             </div>
         </nav>
         <main class="p-4">

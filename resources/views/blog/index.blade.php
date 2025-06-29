@@ -5,12 +5,6 @@
         <div class="container">
             <h1>Noticias del Desarrollo</h1>
 
-            @auth
-                <div class="mb-4 text-right">
-                    <a href="{{ route('blog.create') }}" class="btn-nuevo">Publicar un Post</a>
-                </div>
-            @endauth
-
             <section class="mb-3">
                 <div class="d-flex justify-content-between align-items-end mb-3">
                     <div>
@@ -43,11 +37,8 @@
                     </div>
 
                     @auth
-                        <div>
-                            <form action="{{ route('blog.notify', ['id' => $blogs[2]->blog_id ?? $blogs->last()->blog_id]) }}" method="post">
-                                @csrf
-                                <button type="submit" class="btn btn-warning">Notificar</button>
-                            </form>
+                        <div class="mb-4 text-right">
+                            <a href="{{ route('blog.create') }}" class="btn-nuevo">Publicar un Post</a>
                         </div>
                     @endauth
                 </div>
