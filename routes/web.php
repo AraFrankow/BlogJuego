@@ -18,7 +18,7 @@ Route::get('blog/{id}/verificar-admin', [\App\Http\Controllers\AdminVerification
     ->whereNumber('id');
 
 Route::post('blog/{id}/verificar-admin', [\App\Http\Controllers\AdminVerificationController::class, 'save'])
-    ->name('blog.admin-verification.save')
+    ->name('blog.admin-verification.save')      
     ->whereNumber('id');
 
 Route::get('blog/{id}/verificar-edad', [\App\Http\Controllers\AgeVerificationController::class, 'show'])
@@ -73,3 +73,31 @@ Route::post('cerrar-sesion', [\App\Http\Controllers\AuthController::class, 'logo
 Route::post('blog/{id}/notificar', [\App\Http\Controllers\BlogNotificationController::class, 'notify'])
     ->name('blog.notify')
     ->middleware('auth');
+
+Route::get('productos', [\App\Http\Controllers\ProductoController::class, 'index'])
+    ->name('productos.index');
+
+Route::post('productos', [\App\Http\Controllers\ProductoController::class, 'store'])
+    ->name('productos.store');
+
+Route::get('productos/create', [\App\Http\Controllers\ProductoController::class, 'create'])
+    ->name('productos.create')
+    ->middleware(['auth', \App\Http\Middleware\CheckAdmin::class]);
+
+Route::get('productos/editar/{producto}', [\App\Http\Controllers\ProductoController::class, 'edit'])
+    ->name('productos.edit')
+    ->whereNumber('producto')
+    ->middleware(['auth', \App\Http\Middleware\CheckAdmin::class]);
+
+Route::put('productos/editar/{producto}', [\App\Http\Controllers\ProductoController::class, 'update'])
+    ->name('productos.update')
+    ->whereNumber('producto')
+    ->middleware(['auth', \App\Http\Middleware\CheckAdmin::class]);
+
+Route::delete('productos/{id}/eliminar', [\App\Http\Controllers\ProductoController::class, 'destroy'])
+    ->name('productos.destroy')
+    ->middleware(['auth', \App\Http\Middleware\CheckAdmin::class]);
+
+Route::get('productos/{id}/eliminar', [\App\Http\Controllers\ProductoController::class, 'delete'])
+    ->name('productos.delete')
+    ->middleware(['auth', \App\Http\Middleware\CheckAdmin::class]);

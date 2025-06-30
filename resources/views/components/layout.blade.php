@@ -29,6 +29,10 @@
                         <li class="nav-item">
                             <x-nav-link route="contact">Contactanos</x-nav-link>
                         </li>
+                        <li class="nav-item">
+                            <x-nav-link route="productos.index">Productos</x-nav-link>
+                        </li>
+
                     </ul>
 
                     <ul class="navbar-nav ms-auto">
