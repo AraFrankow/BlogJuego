@@ -94,10 +94,20 @@ Route::put('productos/editar/{producto}', [\App\Http\Controllers\ProductoControl
     ->whereNumber('producto')
     ->middleware(['auth', \App\Http\Middleware\CheckAdmin::class]);
 
-Route::delete('productos/{id}/eliminar', [\App\Http\Controllers\ProductoController::class, 'destroy'])
+Route::delete('productos/eliminar/{producto}', [\App\Http\Controllers\ProductoController::class, 'destroy'])
     ->name('productos.destroy')
+    ->whereNumber('producto')
     ->middleware(['auth', \App\Http\Middleware\CheckAdmin::class]);
 
-Route::get('productos/{id}/eliminar', [\App\Http\Controllers\ProductoController::class, 'delete'])
+Route::get('productos/eliminar/{producto}', [\App\Http\Controllers\ProductoController::class, 'delete'])
     ->name('productos.delete')
+    ->whereNumber('producto')
+    ->middleware(['auth', \App\Http\Middleware\CheckAdmin::class]);
+
+Route::get('usuarios', [\App\Http\Controllers\UserController::class, 'index'])
+    ->name('usuarios.index')
+    ->middleware(['auth', \App\Http\Middleware\CheckAdmin::class]);
+
+Route::get('usuarios/{user}', [\App\Http\Controllers\UserController::class, 'show'])
+    ->name('usuarios.show')
     ->middleware(['auth', \App\Http\Middleware\CheckAdmin::class]);

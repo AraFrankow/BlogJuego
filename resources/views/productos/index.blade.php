@@ -27,8 +27,8 @@
                         <div class="acciones">
                             @auth
                                 @if(auth()->user()->role === 'admin')
-                                    <a href="{{ route('productos.edit', $producto->id) }}" class="btn-editar">Editar</a>
-                                    <a href="{{ route('productos.delete', $producto->id) }}" class="btn-eliminar">Eliminar</a>
+                                    <a href="{{ route('productos.edit', ['producto' => $producto->producto_id]) }}" class="btn-editar">Editar</a>
+                                    <a href="{{ route('productos.delete', ['producto' => $producto->producto_id]) }}" class="btn-eliminar">Eliminar</a>
                                 @endif
                             @endauth
                         </div>

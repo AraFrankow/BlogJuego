@@ -37,16 +37,20 @@
 
                     <ul class="navbar-nav ms-auto">
                         @auth
-                            <li class="nav-item">
-                                <form action="{{ route('auth.logout') }}" method="post">
-                                    @csrf
-                                    <button type="submit" class="nav-link btn btn-link">
-                                        {{ auth()->user()->email }} (Cerrar Sesión)
-                                    </button>
-                                </form>
-                            </li>
+                            <div class="dropdown">
+                                <button class="btn-secundario dropdown-btn">Ver Perfil ▼</button>
+                                <div class="dropdown-content">
+                                    <a href="{{ route('usuarios.show', auth()->user()) }}">Mi Perfil</a>
+                                    @if(auth()->user()->is_admin ?? false)
+                                        <a href="{{ route('usuarios.index') }}">Ver Usuarios</a>
+                                    @endif
+                                    <form action="{{ route('auth.logout') }}" method="POST" class="logout-form">
+                                        @csrf
+                                        <button type="submit" class="logout-btn">Cerrar sesión</button>
+                                    </form>
+                                </div>
+                            </div>
                         @endauth
-
                         @guest
                             <li class="nav-item">
                                 <x-nav-link route="auth.login">Iniciar Sesión</x-nav-link>

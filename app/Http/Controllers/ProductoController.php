@@ -73,9 +73,8 @@ class ProductoController extends Controller
     }
 
 
-    public function destroy(int $id){
-        $producto = Producto::findOrFail($id);
-        $producto->delete($id);
+    public function destroy(Producto $producto){
+        $producto->delete();
         return redirect()
             ->route('productos.index')
             ->with('feedback.message', 'El post <b>'.e($producto->nombre).'</b> se eliminó');

@@ -11,7 +11,7 @@
                     <div class="centrado">
                         <p class="contenido">¿Está seguro de que desea <b>eliminar</b> el producto <b>"{{ $producto->nombre }}"</b> ?</p>
                         <form 
-                            action="{{ route('productos.destroy', ['id' => $producto->id]) }}"
+                            action="{{ route('productos.destroy', ['producto' => $producto->producto_id]) }}"
                             method="post"
                             class="contenido"
                         >
