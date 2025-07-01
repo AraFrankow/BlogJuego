@@ -39,7 +39,7 @@ class ProductoController extends Controller
 
         return redirect()
             ->route('productos.index')
-            ->with('feedback.message' , 'la pelicula <b>'. e($request->nombre) .'</b> se publico exitosamente');
+            ->with('feedback.message' , 'El producto <b>'. e($request->nombre) .'</b> se publico exitosamente');
     }
 
     public function edit(Producto $producto)
@@ -77,7 +77,7 @@ class ProductoController extends Controller
         $producto->delete();
         return redirect()
             ->route('productos.index')
-            ->with('feedback.message', 'El post <b>'.e($producto->nombre).'</b> se eliminó');
+            ->with('feedback.message', 'El producto <b>'.e($producto->nombre).'</b> se eliminó');
     }
 
     public function delete(int $id)
