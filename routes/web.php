@@ -109,5 +109,10 @@ Route::get('usuarios', [\App\Http\Controllers\UserController::class, 'index'])
     ->middleware(['auth', \App\Http\Middleware\CheckAdmin::class]);
 
 Route::get('usuarios/{user}', [\App\Http\Controllers\UserController::class, 'show'])
-    ->name('usuarios.show')
-    ->middleware(['auth', \App\Http\Middleware\CheckAdmin::class]);
+    ->name('usuarios.show');
+
+Route::get('auth/change', [\App\Http\Controllers\PassController::class, 'show'])
+    ->name('auth.change');
+    
+Route::post('auth/change', [\App\Http\Controllers\PassController::class, 'update'])
+    ->name('auth.updatePassword');

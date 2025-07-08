@@ -38,12 +38,14 @@
                     <ul class="navbar-nav ms-auto">
                         @auth
                             <div class="dropdown">
-                                <button class="btn-secundario dropdown-btn">Ver Perfil ▼</button>
+                                <button class="btn-secundario dropdown-btn">Acciones del Perfil ▼</button>
                                 <div class="dropdown-content">
-                                    <a href="{{ route('usuarios.show', auth()->user()) }}">Mi Perfil</a>
-                                    @if(auth()->user()->is_admin ?? false)
-                                        <a href="{{ route('usuarios.index') }}">Ver Usuarios</a>
-                                    @endif
+                                    <a href="{{ route('usuarios.show', auth()->user()->id) }}">Mi Perfil</a>
+                                    @auth
+                                        @if(auth()->user()->role === 'admin')
+                                            <a href="{{ route('usuarios.index') }}">Ver Usuarios</a>
+                                        @endif
+                                    @endauth
                                     <form action="{{ route('auth.logout') }}" method="POST" class="logout-form">
                                         @csrf
                                         <button type="submit" class="logout-btn">Cerrar sesión</button>
