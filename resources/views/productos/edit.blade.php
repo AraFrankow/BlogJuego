@@ -41,7 +41,7 @@
                         name="descripcion" 
                         id="descripcion" 
                         class="form-control @error('descripcion') is-invalid @enderror"
-                        @error('precio') aria-invalid="true" aria-errormessage="error-precio" @enderror
+                        @error('descripcion') aria-invalid="true" aria-errormessage="error-precio" @enderror
                     >{{ old('descripcion', $producto->descripcion) }}</textarea>
                     @error('descripcion')
                         <p class="input-error" id="error-descripcion">{{ $message }}</p>
@@ -49,17 +49,32 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="precio" class="form-label">Precio</label>
+                    <label for="fecha_lanzamiento" class="form-label">Fecha de lanzamiento</label>
                     <input 
-                        type="number" 
-                        id="precio" 
-                        name="precio" 
-                        class="form-control @error('precio') is-invalid @enderror"
-                        @error('precio') aria-invalid="true" aria-errormessage="error-precio" @enderror
-                        value="{{ old('precio', $producto->precio) }}"
+                        type="date" 
+                        id="fecha_lanzamiento" 
+                        name="fecha_lanzamiento" 
+                        class="form-control @error('fecha_lanzamiento') is-invalid @enderror"
+                        @error('fecha_lanzamiento') aria-invalid="true" aria-errormessage="error-fecha_lanzamiento" @enderror
+                        value="{{ old('fecha_lanzamiento', $producto->fecha_lanzamiento) }}"
                     >
-                    @error('precio')
-                        <p class="input-error" id="error-precio">{{ $message }}</p>
+                    @error('fecha_lanzamiento')
+                        <p class="input-error" id="error-fecha_lanzamiento">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="estado" class="form-label">Estado</label>
+                    <input 
+                        type="text" 
+                        id="estado" 
+                        name="estado" 
+                        class="form-control @error('estado') is-invalid @enderror"
+                        @error('estado') aria-invalid="true" aria-errormessage="error-estado" @enderror
+                        value="{{ old('estado', $producto->estado) }}"
+                    >
+                    @error('estado')
+                        <p class="input-error" id="error-estado">{{ $message }}</p>
                     @enderror
                 </div>
 

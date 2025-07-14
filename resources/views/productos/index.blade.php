@@ -3,6 +3,7 @@
     <section class="noticias">
         <div class="container">
             <h1>Listado de Productos</h1>
+            <h2 class="producto-subTitulo">Estos productos podran ser encontrados dentro del juego proximamente</h2>
             <section class="mb-3">
                 <div class="d-flex justify-content-between align-items-end mb-3">
                     @auth
@@ -22,7 +23,8 @@
                         <div class="contenido">
                             <h2>{{ $producto->nombre }}</h2>
                             <p>{{ $producto->descripcion }}</p> 
-                            <p>${{ $producto->precio }}</p>
+                            <p>{{ $producto->fecha_lanzamiento }}</p> 
+                            <p>{{ $producto->estado }}</p> 
                         </div>
                         <div class="acciones">
                             @auth

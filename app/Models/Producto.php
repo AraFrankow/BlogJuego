@@ -11,5 +11,5 @@ class Producto extends Model
     protected $primaryKey = 'producto_id';
 
     public $incrementing = true;
-    protected $fillable = ['nombre', 'descripcion', 'precio'];
+    protected $fillable = ['nombre', 'descripcion', 'fecha_lanzamiento', 'estado'];
 }

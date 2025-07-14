@@ -21,16 +21,16 @@ class ProductoController extends Controller
 
     public function store(Request $request)
     {
-            $request->validate([
-            'nombre'           => 'required|min:2',
-            'precio'           => 'required|numeric',
-            'descripcion'      =>  'required'
+        $request->validate([
+            'nombre'           => 'required',
+            'fecha_lanzamiento'=> 'required',
+            'descripcion'      => 'required',
+            'estado'           => 'required',
         ],[
-            'nombre.required'        => 'El título debe tener un valor',
-            'nombre.min'             => 'El título debe tener al menos :min caracteres',
-            'precio.required'        => 'El precio debe tener un valor',
-            'precio.numeric'         => 'El precio debe ser un valor numérico',
-            'descripcion.required'   => 'La fecha debe tener un valor'
+            'nombre.required'            => 'El título debe tener un valor',
+            'fecha_lanzamiento.required' => 'La fecha de lanzamiento debe tener un valor',
+            'estado.required'            => 'El estado debe tener un valor',
+            'descripcion.required'       => 'La descripcion debe tener un valor'
         ]);
 
         $input = $request->all();
@@ -54,15 +54,15 @@ class ProductoController extends Controller
     public function update(Request $request, Producto $producto)
     {
         $request->validate([
-            'nombre' => 'required|min:2',
-            'descripcion' => 'required',
-            'precio' => 'required|numeric',
-        ], [
-            'nombre.required' => 'El nombre es obligatorio',
-            'nombre.min' => 'El nombre debe tener al menos :min caracteres',
-            'descripcion.required' => 'La descripción es obligatoria',
-            'precio.required' => 'El precio es obligatorio',
-            'precio.numeric' => 'El precio debe ser numérico',
+            'nombre'           => 'required',
+            'fecha_lanzamiento'=> 'required',
+            'descripcion'      => 'required',
+            'estado'           => 'required',
+        ],[
+            'nombre.required'            => 'El título debe tener un valor',
+            'fecha_lanzamiento.required' => 'La fecha de lanzamiento debe tener un valor',
+            'estado.required'            => 'El estado debe tener un valor',
+            'descripcion.required'       => 'La descripcion debe tener un valor'
         ]);
 
         $producto->update($request->all());

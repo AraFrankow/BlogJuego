@@ -30,17 +30,30 @@
                 <label for="descripcion">Descripción</label>
                 <textarea name="descripcion" id="descripcion" rows="6">{{ old('descripcion') }}</textarea>
 
-                <label for="precio">Precio</label>
+                <label for="fecha_lanzamiento">Fecha de lanzamiento</label>
                 <input 
-                    type="number" 
-                    id="precio" 
-                    name="precio" 
-                    value="{{ old('precio') }}" 
-                    class="@error('precio') invalid @enderror"
-                    @error('precio') aria-invalid="true" aria-errormessage="error-precio" @enderror
+                    type="date" 
+                    id="fecha_lanzamiento" 
+                    name="fecha_lanzamiento" 
+                    value="{{ old('fecha_lanzamiento') }}" 
+                    class="@error('fecha_lanzamiento') invalid @enderror"
+                    @error('nofecha_lanzamientombre') aria-invalid="true" aria-errormessage="error-fecha_lanzamiento" @enderror
                 >
-                @error('precio')
-                    <p class="input-error" id="error-precio">{{ $message }}</p>
+                @error('fecha_lanzamiento')
+                    <p class="input-error" id="error-fecha_lanzamiento">{{ $message }}</p>
+                @enderror
+
+                <label for="estado">Estado</label>
+                <input 
+                    type="text" 
+                    id="estado" 
+                    name="estado" 
+                    value="{{ old('estado') }}" 
+                    class="@error('estado') invalid @enderror"
+                    @error('estado') aria-invalid="true" aria-errormessage="error-estado" @enderror
+                >
+                @error('estado')
+                    <p class="input-error" id="error-estado">{{ $message }}</p>
                 @enderror
 
                 <button type="submit" class="btn-principal">Publicar</button>
